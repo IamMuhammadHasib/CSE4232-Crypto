@@ -1,52 +1,45 @@
 #include <bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
 using namespace std;
+
+string decodeIt(string cipherText, int width)
+{
+    int length = cipherText.size();
+    int overflow = length%width;
+    int row = length/width;
+
+    string ans(length, '#');
+    int k = 0;
+    for(int i=0; i<width; i++)
+    {
+        overflow--;
+        int tem = row + (overflow>=0);
+        for(int j=0; j<tem; j++)
+        {
+            ans[j*width+i] = cipherText[k++];
+        }
+    }
+    return ans;
+}
 
 int main()
 {
+    int width = 10;
+
     ifstream fin("cipher.txt");
     ofstream fout("out.txt");
-    string s;
-    getline(fin, s);
-    cout << s<<endl;
 
-    for (int i = 0; i < 10; i++)
+    string cipherText = "", tem;
+    while (fin >> tem)
     {
-        string ans = "";
-        int width = 7;
-        // cin>>width;
-
-        int len = s.size();
-        int row = (len / width) + (len % width > 0), col = 0;
-        // cout << len << " " << row << endl;
-
-        char mat[100][100];
-        memset(mat, 0, sizeof(mat));
-
-        int k = 0, extra = len % width;
-        int cnt = 0;
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < row - cnt; j++)
-            {
-                mat[i][j] = s[k++];
-                // cout<<"hello";
-            }
-            extra--;
-            if (extra <= 0)
-                cnt = 1;
-            // cout<<endl;
-        }
-
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                ans += mat[i][j];
-            }
-        }
-        cout<<s.size()<<" "<<ans.size()<<endl;
-        s=ans;
+        cipherText += tem + " ";
     }
-    fout << s;
-    cout << s;
+    cipherText = cipherText.substr(0, cipherText.length() - 1);
+    cout << cipherText << endl;
+
+    string text = decodeIt(cipherText, 2*width);
+    text = decodeIt(text, width);
+    cout << text;
+    fout << text;
 }
