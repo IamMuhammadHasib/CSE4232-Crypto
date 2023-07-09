@@ -3,14 +3,14 @@
 #define ull unsigned long long
 using namespace std;
 
-int iteration = 20;
+ull iteration = 20;
 
-int modpow(int a, int n, int p)
+ull modpow(ull a, ull n, ull p)
 {
     if (n == 1)
         return a;
 
-    int res = modpow(a, n / 2, p);
+    ull res = modpow(a, n / 2, p);
     res = (res * res) % p;
 
     if (n % 2 == 1)
@@ -18,13 +18,15 @@ int modpow(int a, int n, int p)
     return res;
 }
 
-string lehman(int p)
+string lehman(ull p)
 {
-    for (int i = 0; i < iteration; i++)
+    for (ull i = 0; i < iteration; i++)
     {
-        int a = ((rand() / RAND_MAX) * (p - 3)) + 2;
+        ull a = ((rand() / RAND_MAX) * (p - 3)) + 2;
 
-        int ans = modpow(a, (p - 1) / 2, p);
+        // for JAVA
+        // a = new BigInteger(p.bitLength()-1, new Random())
+        ull ans = modpow(a, (p - 1) / 2, p);
         if (ans != 1 && ans != p - 1)
         {
             return "NO";
@@ -35,7 +37,7 @@ string lehman(int p)
 
 int main()
 {
-    int p;
+    ull p;
     cin >> p;
 
     cout << p << " is prime? " << lehman(p) << endl;

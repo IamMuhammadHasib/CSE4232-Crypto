@@ -22,8 +22,8 @@ int main()
     fin>>s;
     cout<<s<<endl;
 
-    string ans;
-    for(int i=0; i<s.length(); i++)
+    string ans="";
+    for(int i=0; i<s.length(); i+=3)
     {
         ans += end[s.substr(i,3)];
     }
