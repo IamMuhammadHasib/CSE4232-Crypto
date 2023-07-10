@@ -11,10 +11,11 @@ int modpow(int a, int n, int p)
         return a;
 
     int res = modpow(a, n / 2, p);
-    res = (res * res) % p;
 
+    res = (res * res) % p;
     if (n % 2 == 1)
         res = (res * a) % p;
+
     return res;
 }
 
@@ -30,7 +31,7 @@ string mr(int p)
 
         int ans = modpow(a, m, p);
         if (ans == 1 || ans == p - 1)
-            continue;
+            cout<<"..."<<endl;
 
         while (m != p - 1)
         {
@@ -50,8 +51,8 @@ string mr(int p)
 
 int main()
 {
-    int p = 1031;
-    // cin>>p;
+    int p = 11;
 
-    cout << p << " is prime? " << mr(p) << endl;
+    string ans = mr(p);
+    cout << ans << endl;
 }

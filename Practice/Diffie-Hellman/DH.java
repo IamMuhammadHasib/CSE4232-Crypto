@@ -1,7 +1,7 @@
 public class DH {
     public static void main(String[] args) {
         // primitive root q, prime p
-        int p = 223;
+        int p = 1031;
         int aq = 2;
 
         int xa = 1064, xb = 570; // private key
